@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="/" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=10">
+    <meta name="fragment" content="!" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no minimal-ui"/>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link type="text/plain" rel="author" href="/humans.txt" />
+
+    <title><%# title %></title>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+            * element that contains the map. */
+        #map {
+            height: 600px;
+            width: 900px;
+            margin: 0 auto;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .title {
+            padding: 20px 0px 0px 0px;
+            font-weight: 400;
+            font-size: 36px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="title">base-project</h1>
+   
+    <div id="map"></div>
+
+    <script>
+      function initMap() {
+        window.ctx = JSON.parse('<%- JSON.stringify(data) %>')
+        
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 7
+        });
+
+        for (let transport of window.ctx.transports) {
+
+            var directionsDisplay = new google.maps.DirectionsRenderer({
+                map: map
+            });
+
+            let from = {lat: transport.coordinates_from.lat, lng: transport.coordinates_from.lon}
+            let to = {lat: transport.coordinates_to.lat, lng: transport.coordinates_to.lon}
+
+            // Set destination, origin and travel mode.
+            var request = {
+                destination: to,
+                origin: from,
+                travelMode: 'DRIVING'
+            };
+
+            // Pass the directions request to the directions service.
+            var directionsService = new google.maps.DirectionsService();
+            directionsService.route(request, function (response, status) {
+                if (status == 'OK') {
+                    // Display the route on the map.
+                    directionsDisplay.setDirections(response);
+                }
+            });
+        }
+        
+      }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB16sGmIekuGIvYOfNoW9T44377IU2d2Es&callback=initMap"
+        async defer></script>
+
+</body>
+</html>

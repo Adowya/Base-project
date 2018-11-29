@@ -1,0 +1,65 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Transports",
+		"_postman_id": "7dca7e87-1db8-a180-2c6d-0e397e26d4f6",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create transport",
+			"request": {
+				"url": "localhost:3000/api/transport",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Trip 11\",\n    \"coordinates_from\": {\n        \"lat\": 49.15,\n        \"lon\": -0.32\n    },\n    \"coordinates_to\": {\n        \"lat\": 49.07,\n        \"lon\": -0.30\n    },\n    \"vehicule\": \"car\",\n    \"comment\": \"Comment ... #11\"\n}"
+				},
+				"description": "Create"
+			},
+			"response": []
+		},
+		{
+			"name": "Update transport",
+			"request": {
+				"url": "localhost:3000/api/transport/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Updated Trip 1\",\n    \"coordinates_from\": {\n        \"lat\": 49.15,\n        \"lon\": -0.32\n    },\n    \"coordinates_to\": {\n        \"lat\": 49.07,\n        \"lon\": -0.30\n    },\n    \"vehicule\": \"car\",\n    \"comment\": \"Comment ... #1\"\n}"
+				},
+				"description": "Update transport"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete transport",
+			"request": {
+				"url": "localhost:3000/api/transport/11",
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Delete transport"
+			},
+			"response": []
+		}
+	]
+}
